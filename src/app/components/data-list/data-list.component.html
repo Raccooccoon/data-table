@@ -1,0 +1,19 @@
+<clr-datagrid>
+  <clr-dg-column>Данные</clr-dg-column>
+  <clr-dg-column>Управление</clr-dg-column>
+  <clr-dg-row *ngFor="let id of ids" >
+    <clr-dg-cell>
+      <div class="record-container">
+        <div class="record-title">{{ records[id].title }}</div>
+        <div class="record-body">{{ records[id].body }}</div>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div class="buttons-container">
+        <button class="btn btn-info-outline" [routerLink]="['recording', id]">Редактировать</button>
+        <button class="btn btn-danger-outline" [routerLink]="['delete', id]">Удалить</button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>
+<router-outlet></router-outlet>

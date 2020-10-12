@@ -1,0 +1,26 @@
+<clr-modal [(clrModalOpen)]="isModalOpened" [clrModalClosable]="false">
+  <h3 class="modal-title">{{ actionName }}</h3>
+  <div class="modal-body">
+    <label class="clr-control-label" for="title">Заголовок</label>
+    <input
+      class="clr-input"
+      type="text"
+      name="title"
+      [value]="record.title"
+      #title
+     />
+    <label class="clr-control-label" for="message">Сообщение</label>
+    <input
+      class="clr-input"
+      type="text"
+      name="message"
+      [value]="record.body"
+      #body
+    />
+    <app-submit-alert *ngIf="!isValidInput"></app-submit-alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="onSubmit()">Добавить</button>
+    <button type="button" class="btn btn-primary" (click)="onClear()">Отмена</button>
+  </div>
+</clr-modal>

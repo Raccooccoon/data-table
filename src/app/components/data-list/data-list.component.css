@@ -1,0 +1,24 @@
+.record-title {
+  font-size: 24px;
+  font-weight: 700;
+  padding: 0 0 10px;
+}
+
+.record-body {
+  font-size: 18px;
+}
+
+.record-container {
+  width: 600px;
+}
+
+.buttons-container {
+  height: inherit;
+  width: 400px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+clr-dg-cell {
+  align-content: center;
+}
