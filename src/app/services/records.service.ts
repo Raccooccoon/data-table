@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { IRecord } from './../models/record.model';
 
-const baseUrl = 'http://jsonplaceholder.typicode.com/posts';
+const baseUrl = 'https://jsonplaceholder.typicode.com/posts';
 const updateUrl = (id: number) => `${baseUrl}/${id}`;
 const deleteUrl = (id: number) => `${baseUrl}/${id}`;
 
