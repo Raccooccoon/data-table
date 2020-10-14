@@ -27,7 +27,7 @@ export class DeleteAlertComponent implements OnInit {
   }
 
   public onCancel(): void {
-    this.store.dispatch(actions.SELECT({ id: null }));
+    this.store.dispatch(actions.SELECT_ID({ id: null }));
   }
 
   public onDelete(): void {

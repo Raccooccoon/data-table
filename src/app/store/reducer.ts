@@ -48,7 +48,7 @@ const recordReducer = createReducer(
     };
   }),
 
-  on(actions.SELECT, (state, { id }) => {
+  on(actions.SELECT_ID, (state, { id }) => {
     return {
       ...state,
       selected: id

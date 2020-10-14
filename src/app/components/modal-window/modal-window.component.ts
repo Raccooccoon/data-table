@@ -70,7 +70,7 @@ export class ModalWindowComponent implements OnInit {
   }
 
   public onClear(): void {
-    this.store.dispatch(actions.SELECT({ id: null }));
+    this.store.dispatch(actions.SELECT_ID({ id: null }));
   }
 
   private uuid(): number {

@@ -41,20 +41,20 @@ export class DataListComponent implements OnInit {
     this.isAdd = false;
     this.isEdit = true;
     this.isDelete = false;
-    this.store.dispatch(actions.SELECT({ id }));
+    this.store.dispatch(actions.SELECT_ID({ id }));
   }
 
   public onAddMode(): void {
     this.isAdd = true;
     this.isEdit = false;
     this.isDelete = false;
-    this.store.dispatch(actions.SELECT({ id: -1 }));
+    this.store.dispatch(actions.SELECT_ID({ id: -1 }));
   }
 
   public onDelete(id: number): void {
     this.isAdd = false;
     this.isEdit = false;
     this.isDelete = true;
-    this.store.dispatch(actions.SELECT({ id }));
+    this.store.dispatch(actions.SELECT_ID({ id }));
   }
 }
