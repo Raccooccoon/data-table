@@ -1,5 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -20,28 +19,25 @@ export class ModalWindowComponent implements OnInit {
   @ViewChild('body') body: ElementRef;
 
   public record: IRecord;
-  public recordID: string;
   public actionName: string;
-  public isModalOpened: boolean;
   public isEditMode: boolean;
   public isValidInput = true;
+  public selectedID: number | null;
 
   public records$: Observable<{ [id: number]: IRecord }> = this.store.select(selectors.selectRecords);
+  public selectedID$: Observable<number | null> = this.store.select(selectors.selectByID);
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private store: Store<fromRecordsList.IAppState>
   ) { }
 
   public ngOnInit(): void {
-    this.isModalOpened = true;
-    this.recordID = this.route.snapshot.paramMap.get('id');
+    this.selectedID$.pipe(tap((id) => this.selectedID = id)).subscribe();
 
     this.records$.pipe(
       tap((records) => {
-        if (this.recordID !== 'add') {
-          this.record = records[this.recordID];
+        if (this.selectedID !== -1) {
+          this.record = records[this.selectedID];
           this.actionName = 'Редактирование записи';
           this.isEditMode = true;
         } else {
@@ -71,13 +67,10 @@ export class ModalWindowComponent implements OnInit {
     } else {
       this.store.dispatch(actions.CREATE_REQUEST({ record }));
     }
-    this.isModalOpened = false;
-    this.router.navigate(['/']);
   }
 
   public onClear(): void {
-    this.isModalOpened = false;
-    this.router.navigate(['/']);
+    this.store.dispatch(actions.SELECT({ id: null }));
   }
 
   private uuid(): number {

@@ -1,3 +1,6 @@
+<div class="btn-add-container">
+  <button class="btn btn-inverse btn-add" (click)="onAddMode()">Добавить</button>
+</div>
 <clr-datagrid>
   <clr-dg-column>Данные</clr-dg-column>
   <clr-dg-column>Управление</clr-dg-column>
@@ -10,10 +13,11 @@
     </clr-dg-cell>
     <clr-dg-cell>
       <div class="buttons-container">
-        <button class="btn btn-info-outline" [routerLink]="['recording', id]">Редактировать</button>
-        <button class="btn btn-danger-outline" [routerLink]="['delete', id]">Удалить</button>
+        <button class="btn btn-info-outline" (click)="onEditMode(id)">Редактировать</button>
+        <button class="btn btn-danger-outline" (click)="onDelete(id)">Удалить</button>
       </div>
     </clr-dg-cell>
   </clr-dg-row>
 </clr-datagrid>
-<router-outlet></router-outlet>
+<app-modal-window *ngIf="selectedID && (isEdit || isAdd)"></app-modal-window>
+<app-delete-alert *ngIf="selectedID && isDelete"></app-delete-alert>

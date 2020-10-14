@@ -40,3 +40,8 @@ export const DELETE_RECEIVE = createAction(
   '[RECORDS]::DELETE_RECEIVE',
   props<{ id: number }>()
 );
+
+export const SELECT = createAction(
+  '[RECORDS]::SELECT',
+  props<{ id: number | null }>()
+);

@@ -5,7 +5,8 @@ import * as actions from './actions';
 
 const initialState: IState = {
   ids: [],
-  records: {}
+  records: {},
+  selected: null
 };
 
 const recordReducer = createReducer(
@@ -25,12 +26,14 @@ const recordReducer = createReducer(
   on(actions.CREATE_RECEIVE, (state, { record }) => ({
     ...state,
     ids: [...state.ids, record.id],
-    records: { ...state.records, [record.id]: record }
+    records: { ...state.records, [record.id]: record },
+    selected: null
   })),
 
   on(actions.UPDATE_RECEIVE, (state, { id, title, body }) => ({
     ...state,
-    records: { ...state.records, [id]: {...state.records[id], title, body }}
+    records: { ...state.records, [id]: {...state.records[id], title, body }},
+    selected: null
   })),
 
   on(actions.DELETE_RECEIVE, (state, { id }) => {
@@ -40,7 +43,15 @@ const recordReducer = createReducer(
     return {
       ...state,
       ids: filteredIds,
-      records: clonedRecords
+      records: clonedRecords,
+      selected: null
+    };
+  }),
+
+  on(actions.SELECT, (state, { id }) => {
+    return {
+      ...state,
+      selected: id
     };
   })
 );

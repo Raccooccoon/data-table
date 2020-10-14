@@ -13,3 +13,8 @@ export const selectRecordsIDs = createSelector(
   selectRecordsState,
   (state: IState) => state.ids
 );
+
+export const selectByID = createSelector(
+  selectRecordsState,
+  (state: IState) => state.selected
+);

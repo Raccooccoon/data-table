@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import * as actions from '../../../store/actions';
 import * as fromRecordsList from '../../../store/models';
+import * as selectors from '../../../store/selectors';
 
 @Component({
   selector: 'app-delete-alert',
@@ -12,24 +14,23 @@ import * as fromRecordsList from '../../../store/models';
   styleUrls: ['./delete-alert.component.css']
 })
 export class DeleteAlertComponent implements OnInit {
-  public recordID: number;
+  public selectedID: number | null;
+
+  public selectedID$: Observable<number | null> = this.store.select(selectors.selectByID);
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private store: Store<fromRecordsList.IAppState>
   ) { }
 
   public ngOnInit(): void {
-    this.recordID = +this.route.snapshot.paramMap.get('id');
+    this.selectedID$.pipe(tap((id) => this.selectedID = id)).subscribe();
   }
 
   public onCancel(): void {
-    this.router.navigate(['/']);
+    this.store.dispatch(actions.SELECT({ id: null }));
   }
 
-  public onDelete(id: number): void {
-    this.store.dispatch(actions.DELETE_REQUEST({ id }));
-    this.router.navigate(['/']);
+  public onDelete(): void {
+    this.store.dispatch(actions.DELETE_REQUEST({ id: this.selectedID }));
   }
 }

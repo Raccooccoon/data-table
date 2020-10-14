@@ -19,6 +19,13 @@
   grid-template-columns: 50% 50%;
 }
 
+.btn-add-container {
+  width: 100%;
+  position: fixed;
+  top: 5px;
+  z-index: 100000;
+}
+
 clr-dg-cell {
   align-content: center;
 }
