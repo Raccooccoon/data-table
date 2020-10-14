@@ -19,10 +19,11 @@ export class ModalWindowComponent implements OnInit {
   @ViewChild('body') body: ElementRef;
 
   public record: IRecord;
+  public records: { [id: number]: IRecord };
+  public selectedID: number | null;
   public actionName: string;
   public isEditMode: boolean;
   public isValidInput = true;
-  public selectedID: number | null;
 
   public records$: Observable<{ [id: number]: IRecord }> = this.store.select(selectors.selectRecords);
   public selectedID$: Observable<number | null> = this.store.select(selectors.selectByID);
@@ -35,6 +36,7 @@ export class ModalWindowComponent implements OnInit {
     this.selectedID$.pipe(tap((id) => this.selectedID = id)).subscribe();
 
     this.records$.pipe(
+      tap((records) => this.records = records),
       tap((records) => {
         if (this.selectedID !== -1) {
           this.record = records[this.selectedID];
@@ -50,6 +52,7 @@ export class ModalWindowComponent implements OnInit {
 
   public onSubmit(): void {
     this.isValidInput = true;
+
     const record: IRecord = {
       id: this.record.id,
       title: this.title.nativeElement.value.trim(),
@@ -74,6 +77,8 @@ export class ModalWindowComponent implements OnInit {
   }
 
   private uuid(): number {
-    return Math.floor(Math.random() * 100000);
+    const id = Math.floor(Math.random() * 10000);
+    console.log(this.records)
+    return this.records[id] === undefined ? id : this.uuid();
   }
 }
