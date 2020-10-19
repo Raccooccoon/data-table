@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -78,7 +78,6 @@ export class ModalWindowComponent implements OnInit {
 
   private uuid(): number {
     const id = Math.floor(Math.random() * 10000);
-    console.log(this.records)
     return this.records[id] === undefined ? id : this.uuid();
   }
 }
