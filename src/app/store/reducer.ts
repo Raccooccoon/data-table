@@ -25,7 +25,7 @@ const recordReducer = createReducer(
 
   on(actions.CREATE_RECEIVE, (state, { record }) => ({
     ...state,
-    ids: [...state.ids, record.id],
+    ids: [record.id, ...state.ids],
     records: { ...state.records, [record.id]: record },
     selected: null
   })),

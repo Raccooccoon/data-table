@@ -6,7 +6,7 @@ export const selectRecordsState = (state: IAppState) => state.recordsList;
 
 export const selectRecords = createSelector(
   selectRecordsState,
-  (state: IState) => state.records
+  (recordsState: IState) => recordsState.records
 );
 
 export const selectRecordsIDs = createSelector(
